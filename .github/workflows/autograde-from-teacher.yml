@@ -1,0 +1,243 @@
+name: Autograde from teacher
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: mode d'autograding
+        default: mock
+        type: choice
+        options:
+          - mock
+          - openai
+      group:
+        description: grup docent
+        default: ''
+      student:
+        description: identificador explícit de l'alumne o repo
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  autograde:
+    runs-on: ubuntu-latest
+
+    env:
+      AUTOGRADE_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'mock' }}
+      INPUT_GROUP: ${{ github.event_name == 'workflow_dispatch' && inputs.group || '' }}
+      INPUT_STUDENT: ${{ github.event_name == 'workflow_dispatch' && inputs.student || '' }}
+      STUDENT_REPO: ${{ github.repository }}
+      STUDENT_COMMIT: ${{ github.sha }}
+      TEACHER_REPO_URL: ${{ vars.TEACHER_REPO_URL || secrets.TEACHER_REPO_URL }}
+      TEACHER_REPO_REF: ${{ vars.TEACHER_REPO_REF || secrets.TEACHER_REPO_REF || 'main' }}
+      TEACHER_REPO_TOKEN: ${{ secrets.TEACHER_REPO_TOKEN }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL || secrets.OPENAI_MODEL || 'gpt-4o-mini' }}
+
+    steps:
+      # El repositori de l'alumne és el workspace principal de l'avaluació.
+      - name: Checkout student repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show basic info
+        run: |
+          echo "Repositori de l'alumne: ${STUDENT_REPO}"
+          echo "Commit: ${STUDENT_COMMIT}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Mode d'autograding: ${AUTOGRADE_MODE}"
+
+      # TEACHER_REPO_URL és obligatori perquè el professorat manté la configuració central.
+      - name: Check teacher repository configuration
+        run: |
+          if [ -z "${TEACHER_REPO_URL}" ]; then
+            echo "ERROR: falta TEACHER_REPO_URL en secrets o variables del repositori."
+            exit 1
+          fi
+
+          if [ "${AUTOGRADE_MODE}" != "mock" ] && [ "${AUTOGRADE_MODE}" != "openai" ]; then
+            echo "ERROR: mode d'autograding no vàlid: ${AUTOGRADE_MODE}"
+            echo "Valors admesos: mock, openai"
+            exit 1
+          fi
+
+          if [ "${AUTOGRADE_MODE}" = "openai" ] && [ -z "${OPENAI_API_KEY}" ]; then
+            echo "ERROR: el mode openai necessita el secret OPENAI_API_KEY."
+            exit 1
+          fi
+
+          echo "Configuració del repositori del professor detectada."
+          echo "Referència del professor: ${TEACHER_REPO_REF}"
+
+      # El grup pot vindre del dispatch manual o del fitxer opcional student-meta.json.
+      - name: Resolve student metadata
+        run: |
+          mkdir -p _artifacts
+
+          node <<'NODE'
+          const fs = require('fs');
+
+          let meta = {};
+          if (fs.existsSync('student-meta.json')) {
+            meta = JSON.parse(fs.readFileSync('student-meta.json', 'utf8'));
+          }
+
+          const group = process.env.INPUT_GROUP || meta.group || '';
+          const student = process.env.INPUT_STUDENT || meta.student || process.env.STUDENT_REPO;
+
+          if (!group && !student) {
+            console.error('ERROR: no s\'ha pogut resoldre el grup ni un identificador d\'alumne.');
+            console.error('Indica group en workflow_dispatch o afegeix student-meta.json amb group.');
+            process.exit(1);
+          }
+
+          fs.writeFileSync('_artifacts/student-context.json', JSON.stringify({
+            student,
+            group,
+            repository: process.env.STUDENT_REPO,
+            commit: process.env.STUDENT_COMMIT
+          }, null, 2));
+
+          fs.appendFileSync(process.env.GITHUB_ENV, `RESOLVED_STUDENT=${student}\n`);
+          fs.appendFileSync(process.env.GITHUB_ENV, `RESOLVED_GROUP=${group}\n`);
+          NODE
+
+          echo "Alumne resolt: ${RESOLVED_STUDENT:-pendent de carregar en el següent step}"
+          echo "Context de l'alumne guardat en _artifacts/student-context.json"
+
+      # El repositori del professor és la font de veritat per a challenges i rúbriques.
+      - name: Clone teacher repository
+        run: |
+          if [ -n "${TEACHER_REPO_TOKEN}" ] && echo "${TEACHER_REPO_URL}" | grep -q '^https://github.com/'; then
+            AUTH_HEADER="$(printf 'x-access-token:%s' "${TEACHER_REPO_TOKEN}" | base64 -w 0)"
+            git -c "http.https://github.com/.extraheader=AUTHORIZATION: Basic ${AUTH_HEADER}" \
+              clone --depth 1 --branch "${TEACHER_REPO_REF}" "${TEACHER_REPO_URL}" _teacher_repo
+          else
+            git clone --depth 1 --branch "${TEACHER_REPO_REF}" "${TEACHER_REPO_URL}" _teacher_repo
+          fi
+
+      - name: Show teacher repository structure
+        run: |
+          echo "Estructura bàsica carregada del repositori del professor:"
+          find _teacher_repo -maxdepth 3 -type f | sort
+
+      # S'obtenen senyals simples del repo de l'alumne sense afegir dependències.
+      - name: Build student repository signals
+        run: |
+          scripts/build-student-repo-signals.sh _artifacts/repo-signals.json
+
+      - name: Collect student evidence
+        run: |
+          scripts/collect-student-evidence.sh _artifacts/evidence-summary.json
+
+      - name: Collect changed files
+        run: |
+          git show --name-only --format= "${STUDENT_COMMIT}" | sed '/^$/d' > _artifacts/changed-files.txt
+
+          node <<'NODE'
+          const fs = require('fs');
+          const changedFiles = fs.readFileSync('_artifacts/changed-files.txt', 'utf8')
+            .split('\n')
+            .map((line) => line.trim())
+            .filter(Boolean);
+
+          fs.writeFileSync('_artifacts/changed-files.json', JSON.stringify(changedFiles, null, 2));
+          NODE
+
+      # Els scripts del professor decideixen quin microrepte està actiu.
+      - name: Resolve active challenge
+        run: |
+          node _teacher_repo/scripts/resolve-active-challenge.mjs \
+            --active-challenges _teacher_repo/course/active-challenges.json \
+            --group "${RESOLVED_GROUP}" \
+            --student "${RESOLVED_STUDENT}" \
+            --repo "${STUDENT_REPO}" \
+            --out _artifacts/active-challenge.json
+
+      - name: Build base evaluation payload
+        run: |
+          node _teacher_repo/scripts/build-evaluation-payload.mjs \
+            --teacher-repo _teacher_repo \
+            --challenge _artifacts/active-challenge.json \
+            --student-repo "${STUDENT_REPO}" \
+            --student-commit "${STUDENT_COMMIT}" \
+            --out _artifacts/evaluation-payload.base.json
+
+      # El payload final combina la configuració docent i el treball real de l'alumne.
+      - name: Extend evaluation payload with student data
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const readJson = (path) => JSON.parse(fs.readFileSync(path, 'utf8'));
+          const payload = readJson('_artifacts/evaluation-payload.base.json');
+
+          payload.student_repository = payload.student_repository || process.env.STUDENT_REPO;
+          payload.student_commit = payload.student_commit || process.env.STUDENT_COMMIT;
+          payload.changed_files = readJson('_artifacts/changed-files.json');
+          payload.repo_signals = readJson('_artifacts/repo-signals.json');
+          payload.evidence_summary = readJson('_artifacts/evidence-summary.json');
+          payload.student_context = readJson('_artifacts/student-context.json');
+
+          fs.writeFileSync('_artifacts/evaluation-payload.json', JSON.stringify(payload, null, 2));
+          NODE
+
+      # En push s'usa mock; openai queda preparat per a execució manual.
+      - name: Run autograding
+        run: |
+          if [ "${AUTOGRADE_MODE}" = "mock" ]; then
+            node _teacher_repo/scripts/mock-autograde.mjs \
+              --payload _artifacts/evaluation-payload.json \
+              --out _artifacts/autograde-result.json
+          else
+            node _teacher_repo/scripts/openai-autograde.mjs \
+              --payload _artifacts/evaluation-payload.json \
+              --out _artifacts/autograde-result.json \
+              --raw-out _artifacts/openai-raw-response.json
+          fi
+
+      - name: Validate autograding result
+        run: |
+          node _teacher_repo/scripts/validate-autograde-result.mjs \
+            --payload _artifacts/evaluation-payload.json \
+            --result _artifacts/autograde-result.json
+
+      # El resum deixa visible el resultat sense comentar automàticament PRs ni commits.
+      - name: Show final summary
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const readJson = (path) => JSON.parse(fs.readFileSync(path, 'utf8'));
+          const challenge = readJson('_artifacts/active-challenge.json');
+          const result = readJson('_artifacts/autograde-result.json');
+
+          const challengeId = challenge.id || challenge.challenge_id || challenge.slug || challenge.name || 'desconegut';
+          const grade = result.grade ?? result.score ?? result.mark ?? 'pendent';
+          const confidence = result.confidence ?? 'no indicada';
+          const teacherReview = result.teacher_review_required ?? result.teacherReviewRequired ?? 'no indicat';
+
+          console.log(`Mode: ${process.env.AUTOGRADE_MODE}`);
+          console.log(`Challenge resolt: ${challengeId}`);
+          console.log('Payload: _artifacts/evaluation-payload.json');
+          console.log('Resultat: _artifacts/autograde-result.json');
+
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+            '## Autograding',
+            '',
+            `- Repo alumne: ${process.env.STUDENT_REPO}`,
+            `- Challenge: ${challengeId}`,
+            `- Nota provisional: ${grade}`,
+            `- Confiança: ${confidence}`,
+            `- teacher_review_required: ${teacherReview}`,
+            '',
+            'Artefactes principals:',
+            '',
+            '- `_artifacts/evaluation-payload.json`',
+            '- `_artifacts/autograde-result.json`'
+          ].join('\n'));
+          NODE
