@@ -31,10 +31,10 @@ jobs:
       INPUT_STUDENT: ${{ github.event_name == 'workflow_dispatch' && inputs.student || '' }}
       STUDENT_REPO: ${{ github.repository }}
       STUDENT_COMMIT: ${{ github.sha }}
-      TEACHER_REPO_URL: ${{ vars.TEACHER_REPO_URL || secrets.TEACHER_REPO_URL }}
-      TEACHER_REPO_REF: ${{ vars.TEACHER_REPO_REF || secrets.TEACHER_REPO_REF || 'main' }}
-      TEACHER_REPO_TOKEN: ${{ secrets.TEACHER_REPO_TOKEN }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      TEACHER_REPO_URL: ${{ vars.IGNASI_REPO_URL || secrets.TEACHER_REPO_URL }}
+      TEACHER_REPO_REF: ${{ vars.IGNASI_REPO_REF || secrets.TEACHER_REPO_REF || 'main' }}
+      TEACHER_REPO_TOKEN: ${{ secrets.IGNASI_REPO_TOKEN }}
+      OPENAI_API_KEY: ${{ secrets.IGNASI_OPENAPI_KEY }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || secrets.OPENAI_MODEL || 'gpt-4o-mini' }}
 
     steps:
