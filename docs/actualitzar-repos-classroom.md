@@ -20,12 +20,12 @@ El `README.md`, `docs/ai-log.md`, `evidence/README.md` i `tests/README.md` són 
 En cada repositori d'alumne cal definir:
 
 - `AUTOGRADE_GROUP`: grup docent, per exemple `2DAW-A`.
-- `OPENAI_API_KEY`: secret de GitHub, només si es vol usar el mode `openai`.
-- `OPENAI_MODEL`: variable opcional, per exemple `gpt-4o-mini`.
 
 Si el repositori central del professor és privat, també cal:
 
 - `TEACHER_REPO_TOKEN`: secret amb permís de lectura sobre el repositori del professor.
+
+La clau `OPENAI_API_KEY` es configura en el repositori del professor. No cal copiar-la als repositoris d'alumnes.
 
 ## Prova manual
 
@@ -34,7 +34,7 @@ Des de GitHub Actions del repositori d'alumne:
 1. Obri `Autograde from teacher repo`.
 2. Executa `Run workflow`.
 3. Indica `mode = mock` per comprovar el flux sense API.
-4. Després indica `mode = openai` per provar la correcció amb API.
+4. Per provar la correcció real amb API, usa el workflow massiu del repositori del professor.
 
 El workflow genera estos artefactes:
 
@@ -42,6 +42,6 @@ El workflow genera estos artefactes:
 - `evidence-summary.json`
 - `evaluation-payload.json`
 - `autograde-result.json`
-- `openai-raw-response.json`, només en mode `openai`.
+- `openai-raw-response.json`, només si s'executa el mode `openai` localment.
 
 Si el repositori d'alumne usa `master` com a branca principal, el workflow també s'executa en `push` a `master`.

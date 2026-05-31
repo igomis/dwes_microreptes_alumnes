@@ -7,16 +7,15 @@ El workflow connecta el repositori individual de l'alumne amb el repositori cent
 
 En el repositori de l'alumne cal definir estos secrets o variables:
 
-- `TEACHER_REPO_URL`: URL del repositori del professor.
 - `TEACHER_REPO_REF`: branca o tag del repositori del professor. Per defecte, `main`.
 - `TEACHER_REPO_TOKEN`: token opcional si el repositori del professor és privat.
-- `OPENAI_API_KEY`: necessari només per al mode `openai`.
-- `OPENAI_MODEL`: model opcional. Per defecte, `gpt-4o-mini`.
+
+La clau `OPENAI_API_KEY` no cal configurar-la en cada repositori d'alumne. La correcció real amb IA es llança des del repositori del professor amb el workflow massiu `Batch autograde student repositories`.
 
 ## Modes d'execució
 
 - `mock`: mode per defecte en cada `push`. No necessita credencials d'OpenAI.
-- `openai`: mode manual des de `workflow_dispatch`. Necessita `OPENAI_API_KEY`.
+- `openai`: mode manual compatible, però el flux recomanat és executar-lo des del repositori del professor.
 
 ## Grup i alumne
 
@@ -45,4 +44,9 @@ Durant l'execució, el workflow genera fitxers dins de `_artifacts/`:
 
 El payload que rep el corrector inclou els senyals bàsics del repositori i fragments dels fitxers principals de `README.md`, `docs/`, `evidence/`, `tests/` i `src/`. Això permet que el mode `openai` valore evidències reals del repositori, no només la rúbrica i el nom del microrepte.
 
-En esta primera versió no es publiquen comentaris automàtics en PR ni commits. El resultat es veu en el log i en el GitHub Step Summary.
+Quan el professorat executa la correcció massiva amb IA, el resultat es publica en el repositori de l'alumne:
+
+- `autograde/latest.md`: resum llegible per a l'alumne.
+- `autograde/latest.json`: resultat estructurat per a revisió o importació.
+
+El resultat del workflow local del repo d'alumne es veu en el log i en el GitHub Step Summary.
