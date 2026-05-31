@@ -223,15 +223,72 @@ jobs:
           const fs = require('fs');
           const result = JSON.parse(fs.readFileSync('_artifacts/autograde-result.json', 'utf8'));
 
+          const value = (input, fallback = 'n/d') => input ?? fallback;
+          const yesNo = (input) => input === true ? 'Sí' : input === false ? 'No' : 'n/d';
+          const escapeCell = (input) => String(value(input, ''))
+            .replace(/\r?\n/g, '<br>')
+            .replace(/\|/g, '\\|');
+
+          function printList(items, emptyText) {
+            if (!Array.isArray(items) || items.length === 0) {
+              console.log(emptyText);
+              return;
+            }
+
+            for (const item of items) {
+              console.log(`- ${item}`);
+            }
+          }
+
           console.log("# Resum d'autograding");
           console.log("");
           console.log("- Repo alumne: `${{ github.repository }}`");
           console.log("- Alumne: `${{ steps.config.outputs.student }}`");
           console.log("- Grup: `${{ steps.config.outputs.group }}`");
           console.log("- Challenge: `" + (result.challenge_id || "${{ steps.resolve.outputs.challenge_id }}") + "`");
-          console.log("- Nota provisional: **" + (result.final_score_over_10 ?? "n/d") + "**");
-          console.log("- Confiança: **" + (result.confidence ?? "n/d") + "**");
-          console.log("- Revisió docent: **" + (result.teacher_review_required ?? "n/d") + "**");
+          console.log("- Nota provisional: **" + value(result.final_score_over_10) + "/10**");
+          console.log("- Confiança: **" + value(result.confidence) + "**");
+          console.log("- Revisió docent: **" + yesNo(result.teacher_review_required) + "**");
+          console.log("- Resultat provisional: **" + yesNo(result.provisional) + "**");
+          console.log("");
+
+          if (result.short_feedback_md) {
+            console.log("## Feedback");
+            console.log("");
+            console.log(result.short_feedback_md);
+            console.log("");
+          }
+
+          console.log("## Puntuació per dimensions");
+          console.log("");
+          console.log("| Dimensió | Punts | Comentari |");
+          console.log("|---|---:|---|");
+
+          for (const dimension of result.dimension_scores || []) {
+            const score = `${value(dimension.score, 0)}/${value(dimension.max_score, '?')}`;
+            console.log(`| ${escapeCell(dimension.id)} | ${escapeCell(score)} | ${escapeCell(dimension.reason)} |`);
+          }
+
+          console.log("");
+          console.log("## Punts forts");
+          console.log("");
+          printList(result.strengths, "Sense punts forts destacats en aquesta execució.");
+          console.log("");
+          console.log("## Millores recomanades");
+          console.log("");
+          printList(result.weaknesses, "Sense millores concretes en aquesta execució.");
+          console.log("");
+
+          if (Array.isArray(result.blocking_flags) && result.blocking_flags.length > 0) {
+            console.log("## Bloquejos detectats");
+            console.log("");
+            printList(result.blocking_flags, "");
+            console.log("");
+          }
+
+          console.log("## Fitxers");
+          console.log("");
+          console.log("El detall complet està disponible en l'artefacte `autograde-result` d'aquesta execució.");
           JS
 
       - name: Upload autograde artifacts
