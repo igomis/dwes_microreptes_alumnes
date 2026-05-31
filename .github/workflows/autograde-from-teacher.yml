@@ -133,6 +133,17 @@ jobs:
           test -f scripts/openai-autograde.mjs
           test -f scripts/validate-autograde-result.mjs
 
+      - name: Collect student repository evidence
+        shell: bash
+        env:
+          STUDENT_REPO: ${{ github.repository }}
+          STUDENT_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p _artifacts
+          sh scripts/build-student-repo-signals.sh _artifacts/repo-signals.json
+          sh scripts/collect-student-evidence.sh _artifacts/evidence-summary.json
+
       # L'script usa process.cwd(), per aixo cal executar-lo des de _teacher_repo.
       - name: Resolve active challenge
         id: resolve
@@ -160,7 +171,9 @@ jobs:
             --student "${{ steps.config.outputs.student }}" \
             --group "${{ steps.config.outputs.group }}" \
             --repo "${{ github.repository }}" \
-            --commit "${{ github.sha }}"
+            --commit "${{ github.sha }}" \
+            --repo-signals "../_artifacts/repo-signals.json" \
+            --evidence-summary "../_artifacts/evidence-summary.json"
           echo "payload_path=_teacher_repo/tmp/evaluation-payload.json" >> "$GITHUB_OUTPUT"
 
       - name: Mock autograde

@@ -37,8 +37,12 @@ Si no hi ha grup, el workflow només continua si disposa d'un identificador d'al
 
 Durant l'execució, el workflow genera fitxers dins de `_artifacts/`:
 
+- `repo-signals.json`
+- `evidence-summary.json`
 - `evaluation-payload.json`
 - `autograde-result.json`
 - `openai-raw-response.json`, només si aplica
+
+El payload que rep el corrector inclou els senyals bàsics del repositori i fragments dels fitxers principals de `README.md`, `docs/`, `evidence/`, `tests/` i `src/`. Això permet que el mode `openai` valore evidències reals del repositori, no només la rúbrica i el nom del microrepte.
 
 En esta primera versió no es publiquen comentaris automàtics en PR ni commits. El resultat es veu en el log i en el GitHub Step Summary.

@@ -9,8 +9,24 @@ const fs = require('fs');
 const path = require('path');
 
 const output = process.argv[2];
+const textExtensions = new Set([
+  '.md',
+  '.txt',
+  '.json',
+  '.yml',
+  '.yaml',
+  '.php',
+  '.js',
+  '.ts',
+  '.html',
+  '.css',
+  '.py',
+  '.sh'
+]);
+const maxFilesPerSection = 12;
+const maxExcerptChars = 4000;
 
-function listFiles(dir, maxFiles = 50) {
+function listFiles(dir, maxFiles = maxFilesPerSection) {
   if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
     return [];
   }
@@ -40,26 +56,51 @@ function listFiles(dir, maxFiles = 50) {
   return result;
 }
 
+function isTextFile(filePath) {
+  return textExtensions.has(path.extname(filePath).toLowerCase());
+}
+
+function safeExcerpt(filePath) {
+  if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
+    return null;
+  }
+
+  if (!isTextFile(filePath)) {
+    return null;
+  }
+
+  const content = fs.readFileSync(filePath, 'utf8');
+  return content.length > maxExcerptChars
+    ? `${content.slice(0, maxExcerptChars)}\n...[retallat]`
+    : content;
+}
+
 function fileSummary(filePath) {
   if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
     return null;
   }
 
-  const content = fs.readFileSync(filePath, 'utf8');
+  const content = isTextFile(filePath) ? fs.readFileSync(filePath, 'utf8') : '';
   return {
     path: filePath,
-    bytes: Buffer.byteLength(content),
-    lines: content.length === 0 ? 0 : content.split('\n').length
+    bytes: fs.statSync(filePath).size,
+    lines: content.length === 0 ? 0 : content.split('\n').length,
+    excerpt: safeExcerpt(filePath)
   };
+}
+
+function summarizeFiles(files) {
+  return files.map((filePath) => fileSummary(filePath)).filter(Boolean);
 }
 
 const summary = {
   generated_at: new Date().toISOString(),
   readme: fileSummary('README.md'),
   ai_log: fileSummary('docs/ai-log.md'),
-  evidence_files: listFiles('evidence'),
-  test_files: listFiles('tests'),
-  source_files: listFiles('src')
+  docs_files: summarizeFiles(listFiles('docs')),
+  evidence_files: summarizeFiles(listFiles('evidence')),
+  test_files: summarizeFiles(listFiles('tests')),
+  source_files: summarizeFiles(listFiles('src'))
 };
 
 fs.writeFileSync(output, JSON.stringify(summary, null, 2));
