@@ -1,0 +1,78 @@
+# AGENTS.md
+
+## Criteri transversal d'alineació
+
+Els continguts de `dwes-restructuracio-modul`, `dwes-documentacio-alumnat` i `dwes-microreptes-autocorreccio` han d'estar alineats. Quan es cree, canvie o elimine un repte, sessió o microrepte en un d'estos repositoris, cal revisar si també cal actualitzar els altres dos.
+
+La coherència mínima ha d'incloure:
+
+- mateix codi de repte, sessió i microrepte, per exemple `R2`, `R2S2`, `R2M2`;
+- mateix nom funcional del microrepte;
+- mateix abast pedagògic;
+- mateixos criteris d'avaluació treballats;
+- evidències compatibles entre programació d'aula, documentació d'alumnat i autocorrecció;
+- mateixa decisió sobre què entra com a mínim i què queda com a ampliació.
+
+## Paper de cada projecte
+
+- `dwes-restructuracio-modul`: font docent de planificació, programació d'aula, seqüenciació, criteris curriculars i decisions metodològiques.
+- `dwes-documentacio-alumnat`: materials que veu l'alumnat: reptes, microreptes, instruccions de treball, rúbriques/checklists i materials de suport.
+- `dwes-microreptes-autocorreccio`: definició executable de les autocorreccions: `challenge.json`, `rubric.json`, prompts, evidències esperades i proves de revisió.
+- `dwes-microreptes-alumnes`: base o plantilla de treball de l'alumnat; ha de reflectir el que es demana en la documentació i el que després es podrà autocorregir.
+
+## Estructura esperada de `dwes-documentacio-alumnat`
+
+La documentació d'alumnat ha de diferenciar clarament tres blocs:
+
+- Reptes i microreptes: què ha de construir l'alumnat, què ha d'entregar, requisits mínims i què queda per a més avant.
+- Rúbriques, checklists o criteris de sessió/microrepte: com es valorarà cada sessió o microrepte, amb evidències observables.
+- Materials de suport per als reptes: guies, consulta tècnica, exemples, plantilles i recursos que ajuden a resoldre el repte sense substituir l'enunciat.
+
+No s'han de mesclar en una mateixa pàgina instruccions de lliurament, rúbrica i material teòric extens si això dificulta que l'alumnat entenga què ha de fer.
+
+## Estructura obligatòria de les programacions d'aula
+
+Les programacions d'aula de `dwes-restructuracio-modul` han de tractar sempre els mateixos punts. Quan este repositori incorpore plantilles, exemples o estructura de treball per a l'alumnat, ha de permetre generar evidències coherents amb estos apartats:
+
+- Finalitat de la sessió.
+- Encaix dins del repte.
+- Relació amb RA, CA i criteris de treball.
+- Producte esperat.
+- Preparació prèvia del professorat.
+- Continguts a explicar.
+- Seqüenciació de la sessió.
+- Tasques concretes de l'alumnat.
+- Evidències mínimes.
+- Criteris d'èxit.
+- Què no és suficient.
+- Ús de la IA.
+- Suport per a l'alumnat amb dificultats.
+- Ampliació per a l'alumnat més avançat.
+- Checklist de tancament.
+- Connexió amb el microrepte posterior.
+
+El repositori d'alumnes no ha de contindre la programació docent completa, però sí ha de facilitar que l'alumnat puga completar les tasques, evidències, checklist i connexió amb el següent microrepte.
+
+## Relació entre sessions i microreptes
+
+Cada sessió ordinària ha de tindre associat un microrepte. La nomenclatura ha de permetre veure la relació entre repte, sessió i microrepte, per exemple `R2S2` i `R2M2`.
+
+Les úniques excepcions són les sessions de presentació o tancament dels reptes `2`, `3`, `4` i `5`. Estes sessions poden no tindre microrepte associat si la seua funció és introduir el repte, organitzar el treball, fer síntesi, revisar evidències o tancar el procés.
+
+Este repositori només ha de preparar estructura o evidències per a sessions amb microrepte. Les sessions de presentació o tancament poden requerir lectura, revisió o organització, però no han de generar una carpeta de microrepte pròpia si així està definit.
+
+## Forma de treball
+
+Abans d'editar:
+
+- revisar què demana `dwes-documentacio-alumnat`;
+- revisar què autocorregeix `dwes-microreptes-autocorreccio`;
+- evitar afegir solucions o estructures que anticipen continguts encara no treballats.
+
+Després d'editar:
+
+- comprovar que la plantilla o base d'alumnat permet generar les evidències demanades;
+- no incloure respostes tancades que substituïsquen el treball de l'alumnat;
+- mantindre el repositori preparat per a GitHub Classroom o ús equivalent.
+- al final de cada iteració, fer commit i push dels repositoris afectats;
+- fer staging selectiu dels fitxers de la iteració i no incloure fitxers aliens o temporals, com `.DS_Store`.
