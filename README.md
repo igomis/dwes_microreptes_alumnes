@@ -8,6 +8,8 @@ No és el repositori que defineix la rúbrica ni l'autocorrecció activa. Eixa i
 
 Este README és part del repositori base. No l'uses com a fitxa d'entrega del microrepte. Per a cada entrega, actualitza `ENTREGA.md` i els fitxers necessaris de `docs/`, `evidence/`, `tests/` i `src/` o `app/`.
 
+Els README de `docs/`, `evidence/` i `tests/` també són guies de carpeta del template. No cal modificar-los per entregar un microrepte.
+
 ## Branca corregible
 
 La branca ordinària de lliurament i correcció és:

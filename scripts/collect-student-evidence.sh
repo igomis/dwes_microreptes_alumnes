@@ -25,6 +25,13 @@ const textExtensions = new Set([
 ]);
 const maxFilesPerSection = 12;
 const maxExcerptChars = 4000;
+const templateGuideFiles = new Set([
+  'docs/README.md',
+  'docs/autograde.md',
+  'docs/actualitzar-repos-classroom.md',
+  'evidence/README.md',
+  'tests/README.md'
+]);
 
 function listFiles(dir, maxFiles = maxFilesPerSection) {
   if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
@@ -46,7 +53,7 @@ function listFiles(dir, maxFiles = maxFilesPerSection) {
       const fullPath = path.join(current, entry.name);
       if (entry.isDirectory()) {
         walk(fullPath);
-      } else if (entry.isFile()) {
+      } else if (entry.isFile() && !templateGuideFiles.has(fullPath)) {
         result.push(fullPath);
       }
     }

@@ -48,7 +48,7 @@ Durant l'execució, el workflow genera fitxers dins de `_artifacts/`:
 - `autograde-result.json`
 - `openai-raw-response.json`, només si aplica
 
-El payload que rep el corrector inclou els senyals bàsics del repositori i fragments dels fitxers principals de `ENTREGA.md`, `README.md`, `docs/`, `evidence/`, `tests/` i `src/`. Això permet que el mode `openai` valore evidències reals del repositori, no només la rúbrica i el nom del microrepte.
+El payload que rep el corrector inclou els senyals bàsics del repositori i fragments dels fitxers principals de `ENTREGA.md`, `docs/`, `evidence/`, `tests/` i `src/`. El `README.md` arrel pot aparéixer com a context del repositori base, però no és la fitxa d'entrega. Els README de carpeta (`docs/README.md`, `evidence/README.md`, `tests/README.md`) i esta guia d'autograding no es tracten com a evidències del microrepte.
 
 Quan el professorat executa la correcció massiva amb IA, el resultat es publica en el repositori de l'alumne:
 
