@@ -17,6 +17,12 @@ La clau `OPENAI_API_KEY` no cal configurar-la en cada repositori d'alumne. La co
 - `mock`: mode per defecte en cada `push`. No necessita credencials d'OpenAI.
 - `openai`: mode manual compatible, però el flux recomanat és executar-lo des del repositori del professor.
 
+## Branca de lliurament
+
+La branca ordinària de lliurament és `main`. El workflow també pot executar-se en `master` per compatibilitat, però el criteri general del curs és deixar el treball corregible en `main`.
+
+Si treballes en una branca pròpia, integra el resultat en `main` abans de demanar correcció.
+
 ## Grup i alumne
 
 El workflow necessita resoldre el grup docent. Es pot indicar manualment en `workflow_dispatch` amb l'input `group`.
