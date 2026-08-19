@@ -95,6 +95,7 @@ function summarizeFiles(files) {
 
 const summary = {
   generated_at: new Date().toISOString(),
+  delivery: fileSummary('ENTREGA.md'),
   readme: fileSummary('README.md'),
   ai_log: fileSummary('docs/ai-log.md'),
   docs_files: summarizeFiles(listFiles('docs')),

@@ -51,6 +51,7 @@ const signals = {
   commit: process.env.STUDENT_COMMIT || process.env.CURRENT_COMMIT || '',
   files: {
     readme: exists('README.md'),
+    delivery: exists('ENTREGA.md'),
     ai_log: exists('docs/ai-log.md'),
     student_meta: exists('student-meta.json')
   },

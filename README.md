@@ -6,6 +6,8 @@ Este repositori conté el treball real de l'alumne: codi, evidències, documenta
 
 No és el repositori que defineix la rúbrica ni l'autocorrecció activa. Eixa informació es resol des del repositori central del professorat.
 
+Este README és part del repositori base. No l'uses com a fitxa d'entrega del microrepte. Per a cada entrega, actualitza `ENTREGA.md` i els fitxers necessaris de `docs/`, `evidence/`, `tests/` i `src/` o `app/`.
+
 ## Branca corregible
 
 La branca ordinària de lliurament i correcció és:
@@ -20,22 +22,17 @@ Pots treballar en branques pròpies si t'ajuda a organitzar-te, per exemple `r2m
 
 El nom de la branca no decideix quin microrepte es corregeix. El microrepte actiu el configura el professorat des del sistema d'autocorrecció.
 
-## Microrepte actual
+## Fitxer d'entrega
 
-Mantín este apartat actualitzat en cada entrega.
+El fitxer que l'alumne ha de mantindre actualitzat és `ENTREGA.md`.
 
-| Camp | Valor |
-|---|---|
-| Microrepte | `R1M1`, `R2M3`, `R3M5`... |
-| Què he fet |  |
-| Com provar-ho |  |
-| Evidències principals |  |
+En cada microrepte ha d'indicar:
 
-Exemple d'evidències:
-
-- `docs/r2m3.md`
-- `evidence/r2m3/`
-- `tests/`
+- quin microrepte entrega;
+- què ha fet;
+- com es pot provar;
+- on estan les evidències principals;
+- decisions tècniques o dubtes rellevants.
 
 ## Organització recomanada
 
@@ -43,6 +40,7 @@ Exemple d'evidències:
 
 ```text
 README.md
+ENTREGA.md
 docs/
   r2m3.md
   r2m4.md
@@ -58,17 +56,11 @@ No cal crear totes les carpetes si el microrepte no les necessita. El que sí ca
 
 ## Com executar-lo
 
-Indica els passos mínims per arrancar el projecte o provar la funcionalitat.
-
-Exemple:
-
-```bash
-# pendent d'adaptar segons la tecnologia usada
-```
+Els passos concrets per arrancar o provar cada microrepte s'han d'escriure en `ENTREGA.md` o en el document corresponent de `docs/`.
 
 ## Com verificar-lo
 
-Explica com comprovar que el treball funciona o que les evidències són revisables.
+L'alumne ha de deixar en `ENTREGA.md` o en `docs/` com comprovar que el treball funciona o que les evidències són revisables.
 
 Pots incloure:
 
@@ -81,12 +73,7 @@ Pots incloure:
 
 ## Decisions tècniques
 
-Registra les decisions importants preses durant el microrepte.
-
-- Decisió:
-- Motiu:
-- Alternatives descartades:
-- Dubtes pendents:
+Les decisions importants de cada microrepte s'han de registrar en `ENTREGA.md` o en un document específic de `docs/`, per exemple `docs/r2m3.md`.
 
 ## Evidències
 
@@ -137,7 +124,7 @@ La nota automàtica és provisional i pot requerir revisió docent.
 
 Abans d'entregar:
 
-- [ ] actualitza l'apartat `Microrepte actual`;
+- [ ] actualitza `ENTREGA.md`;
 - [ ] comprova que les evidències estan dins del repositori;
 - [ ] comprova que no has pujat secrets reals, tokens o fitxers temporals;
 - [ ] integra el treball en `main`.

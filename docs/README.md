@@ -10,4 +10,4 @@ r3m5.md
 ai-log.md
 ```
 
-El `README.md` principal ha d'indicar quin és el microrepte actual i quins documents cal revisar.
+`ENTREGA.md` ha d'indicar quin és el microrepte actual i quins documents cal revisar.
