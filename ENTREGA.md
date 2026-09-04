@@ -145,7 +145,7 @@ git push origin main
 
 Canvia `R2M3` pel microrepte que estàs entregant.
 
-Després del `push`, revisa en GitHub que els fitxers s'han pujat i que la pestanya `Actions` no mostra cap error inesperat.
+Després del `push`, revisa en GitHub que els fitxers s'han pujat correctament.
 
 ## Estat actual
 

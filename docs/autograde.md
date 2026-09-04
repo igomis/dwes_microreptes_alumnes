@@ -1,31 +1,31 @@
 # Autograding des del repositori del professor
 
-Este template inclou el workflow `.github/workflows/autograde-from-teacher.yml`.
-El workflow connecta el repositori individual de l'alumne amb el repositori central del professor i usa eixe repositori com a font de veritat per resoldre el microrepte actiu i executar l'autograding.
+Este template no inclou workflows de GitHub Actions propis. La correcció es llança des del repositori central del professorat, que clona el repositori individual de l'alumne, recull evidències i publica el resultat quan correspon.
 
-## Configuració necessària
+## Configuració necessària en l'alumnat
 
-En el repositori de l'alumne cal definir estos secrets o variables:
+En el repositori de l'alumne no cal definir secrets ni variables d'autograding.
 
-- `TEACHER_REPO_REF`: branca o tag del repositori del professor. Per defecte, `main`.
-- `TEACHER_REPO_TOKEN`: token opcional si el repositori del professor és privat.
+La clau `OPENAI_API_KEY` tampoc s'ha de configurar en cada repositori d'alumne. La correcció real amb IA es llança des del repositori del professor amb el workflow massiu `Batch autograde student repositories`.
 
-La clau `OPENAI_API_KEY` no cal configurar-la en cada repositori d'alumne. La correcció real amb IA es llança des del repositori del professor amb el workflow massiu `Batch autograde student repositories`.
+## Scripts de suport
 
-## Modes d'execució
+El repositori conserva dos scripts en `scripts/`:
 
-- `mock`: mode per defecte en cada `push`. No necessita credencials d'OpenAI.
-- `openai`: mode manual compatible, però el flux recomanat és executar-lo des del repositori del professor.
+- `build-student-repo-signals.sh`: genera un resum automàtic de senyals del repositori, com presència de `README.md`, `docs/ai-log.md`, `src/`, `tests/`, `evidence/` i recompte de fitxers.
+- `collect-student-evidence.sh`: recull fragments revisables de `README.md`, `docs/`, `evidence/`, `tests/` i `src/` per construir el payload que rebrà el corrector.
+
+Estos scripts no s'executen sols. Els executa el workflow massiu del professorat després de clonar el repositori de l'alumne.
 
 ## Branca de lliurament
 
-La branca ordinària de lliurament és `main`. El workflow també pot executar-se en `master` per compatibilitat, però el criteri general del curs és deixar el treball corregible en `main`.
+La branca ordinària de lliurament és `main`.
 
 Si treballes en una branca pròpia, integra el resultat en `main` abans de demanar correcció.
 
 ## Grup i alumne
 
-El workflow necessita resoldre el grup docent. Es pot indicar manualment en `workflow_dispatch` amb l'input `group`.
+El sistema de correcció necessita resoldre el grup docent. El professorat pot indicar-lo des del workflow massiu o des de la llista central de repositoris.
 
 També es pot crear un fitxer opcional `student-meta.json` a l'arrel del repositori:
 
@@ -40,7 +40,7 @@ Si no hi ha grup, el workflow només continua si disposa d'un identificador d'al
 
 ## Artefactes generats
 
-Durant l'execució, el workflow genera fitxers dins de `_artifacts/`:
+Durant la correcció massiva, el repositori del professor genera fitxers temporals d'avaluació:
 
 - `repo-signals.json`
 - `evidence-summary.json`
@@ -54,5 +54,5 @@ Quan el professorat executa la correcció massiva amb IA, el resultat es publica
 
 - `autograde/latest.md`: resum llegible per a l'alumne.
 - `autograde/latest.json`: resultat estructurat per a revisió o importació.
-
-El resultat del workflow local del repo d'alumne es veu en el log i en el GitHub Step Summary.
+- `autograde/README.md`: índex visible de correccions.
+- `autograde/history/`: historial de valoracions anteriors.
