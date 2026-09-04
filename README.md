@@ -6,7 +6,7 @@ Este és el fitxer que has d'actualitzar en cada entrega.
 
 | Camp | Valor |
 |---|---|
-| Microrepte | `R1M1`, `R2M3`, `R3M5`... |
+| Microrepte | `R?M?` |
 | Què he fet |  |
 | Com provar-ho |  |
 | Evidències principals |  |
