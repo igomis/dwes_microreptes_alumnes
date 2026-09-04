@@ -103,10 +103,13 @@ docs/r2m3.md
 Quan el microrepte ho exigisca, cal afegir `docs/ai-log.md` amb:
 
 - objectiu de la consulta a la IA;
+- pregunta o prompte literal que s'ha escrit;
 - resum del que s'ha suggerit;
 - què s'ha acceptat;
 - què s'ha rebutjat o modificat;
 - com s'ha verificat.
+
+No cal copiar tota la conversa. Sí que convé copiar el text exacte de la pregunta principal perquè es puga veure si estava alineada amb l'objectiu declarat.
 
 L'ús de la IA no substitueix la comprensió, la verificació ni l'autoria del treball.
 
