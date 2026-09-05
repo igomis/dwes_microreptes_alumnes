@@ -159,6 +159,7 @@ Quan el microrepte ho exigisca, cal afegir `docs/ai-log.md` amb:
 - resum del que s'ha suggerit;
 - què s'ha acceptat;
 - què s'ha rebutjat o modificat;
+- què no s'ha entés encara o quin dubte queda;
 - com s'ha verificat.
 
 No cal copiar tota la conversa. Sí que convé copiar el text exacte de la pregunta principal perquè es puga veure si estava alineada amb l'objectiu declarat.

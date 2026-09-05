@@ -16,5 +16,6 @@ Escriu ací el text exacte que has enviat a la IA.
 - Resum del suggeriment:
 - Què s'ha acceptat:
 - Què s'ha rebutjat o modificat:
+- Què no he entés encara o quin dubte queda:
 - Com s'ha verificat:
 - En quin fitxer o commit es veu:
