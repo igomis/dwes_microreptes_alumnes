@@ -16,18 +16,7 @@ Si treballes en una branca pròpia, integra el resultat en `main` abans de deman
 
 ## Grup i alumne
 
-El sistema de correcció necessita resoldre el grup docent. El professorat pot indicar-lo des del workflow massiu o des de la llista central de repositoris.
-
-També es pot crear un fitxer opcional `student-meta.json` a l'arrel del repositori:
-
-```json
-{
-  "student": "cipfpbatoi/dwes-nom-cognom",
-  "group": "2DAW-A"
-}
-```
-
-Si no hi ha grup, el workflow només continua si disposa d'un identificador d'alumne o repositori que permeta al repositori del professor resoldre el microrepte actiu.
+El sistema de correcció resol el grup docent des de la llista central de repositoris que manté el professorat. L'alumnat no ha de crear cap fitxer de configuració per a l'autocorrecció.
 
 ## Artefactes generats
 
