@@ -34,6 +34,7 @@ En cada microrepte ha d'indicar:
 - què ha fet;
 - com es pot provar;
 - on estan les evidències principals;
+- quins tests o comprovacions ha executat;
 - decisions tècniques o dubtes rellevants.
 
 Si una explicació d'un microrepte anterior s'ha de conservar, passa-la a un fitxer específic de `docs/`, per exemple `docs/r2m3.md`. Així `README.md` continua sent ràpid de revisar i sempre apunta al treball que toca corregir.
@@ -71,9 +72,9 @@ No cal crear totes les carpetes si el microrepte no les necessita. El que sí ca
 Els fitxers recomanats per microrepte són:
 
 - `README.md`: resum actual i enllaços principals.
-- `docs/rXmY.md`: explicació més llarga, decisions tècniques o notes de disseny.
+- `docs/rXmY.md`: explicació més llarga, decisions tècniques, notes de disseny o programació pròpia del microrepte.
 - `evidence/rXmY/`: captures, logs, respostes HTTP, traces o resultats manuals.
-- `tests/`: proves automàtiques quan el microrepte les demane o quan ajuden a verificar el treball.
+- `tests/rXmY.*`: proves automàtiques quan el microrepte les demane o quan ajuden a verificar el treball.
 
 ## Com executar-lo
 
@@ -83,6 +84,8 @@ Els passos concrets per arrancar o provar cada microrepte s'han d'escriure en `R
 
 L'alumne ha de deixar en `README.md` o en `docs/` com comprovar que el treball funciona o que les evidències són revisables.
 
+El `README.md` de l'arrel ha d'enllaçar els fitxers concrets de `docs/`, `evidence/` i `tests/` que corresponen al microrepte actual. No és suficient escriure "veure carpeta docs" o "veure tests".
+
 Pots incloure:
 
 - tests automàtics;
@@ -91,6 +94,36 @@ Pots incloure:
 - captures textuals;
 - logs;
 - enllaços a documents dins de `docs/` o `evidence/`.
+
+## Tests
+
+Els tests han de ser proves executables i repetibles del comportament del projecte.
+
+No han de ser una còpia del codi ni una captura. Han d'executar una part del sistema i comprovar un resultat. Segons el moment del curs poden ser:
+
+- un script simple en `tests/`, per exemple `tests/r2m7-flux.sh`;
+- una prova unitària amb PHPUnit, Pest, Vitest, Jest o equivalent;
+- una prova funcional que faça una petició HTTP i comprove la resposta;
+- una comprovació de validació, error, estat o persistència amb dades controlades.
+
+Com a mínim, quan el microrepte demane tests, han d'incloure:
+
+- un cas que ha de funcionar;
+- un cas d'error, límit o dada no vàlida si aplica;
+- dades de prova pròpies, no només l'exemple del professorat;
+- una ordre exacta per executar-los;
+- el resultat esperat o una explicació de què significa que passen.
+
+Si un microrepte encara no demana tests automàtics, cal deixar una prova manual reproduïble en `README.md`, `docs/rXmY.md` o `evidence/rXmY/`: passos, dades d'entrada i resultat esperat.
+
+Exemples:
+
+```bash
+php vendor/bin/phpunit
+npm test
+node tests/r2m3.test.js
+bash tests/r2m7-flux.sh
+```
 
 ## Decisions tècniques
 
