@@ -1,6 +1,10 @@
-# Entrega del microrepte
+# Entrega del microrepte actual
 
 Este és el fitxer que has d'actualitzar en cada entrega.
+
+En cada microrepte pots sobreescriure el contingut anterior d'este `README.md`. Ha de descriure l'entrega actual, no tot l'historial del curs. Si necessites conservar informació d'un microrepte anterior, guarda-la en un fitxer propi de `docs/`, per exemple `docs/r2m3.md`.
+
+No cal modificar els README de `docs/`, `evidence/` o `tests`: són guies de carpeta.
 
 ## Microrepte actual
 
@@ -10,6 +14,8 @@ Este és el fitxer que has d'actualitzar en cada entrega.
 | Què he fet |  |
 | Com provar-ho |  |
 | Evidències principals |  |
+
+Ompli la taula amb informació concreta. En `Evidències principals`, enllaça els fitxers o carpetes que demostren el treball, per exemple `docs/r2m3.md`, `evidence/r2m3/` o `tests/r2m3.test.js`.
 
 ## Com executar-lo
 

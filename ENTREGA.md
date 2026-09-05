@@ -18,15 +18,15 @@ La branca ordinària de lliurament i correcció és:
 main
 ```
 
-Este repositori base pot mantindre compatibilitat amb `master` mentre es fa la transició, però el criteri de treball per a l'alumnat és deixar el lliurament corregible en `main`.
-
 Pots treballar en branques pròpies si t'ajuda a organitzar-te, per exemple `r2m3`, `r3m5` o `feature/auth`, però abans de demanar correcció has d'integrar el treball en `main`.
 
 El nom de la branca no decideix quin microrepte es corregeix. El microrepte actiu el configura el professorat des del sistema d'autocorrecció.
 
 ## Fitxer d'entrega
 
-El fitxer que l'alumne ha de mantindre actualitzat és `README.md`.
+El fitxer que l'alumne ha de mantindre actualitzat és `README.md`, el de l'arrel del repositori.
+
+`README.md` representa l'entrega actual. En cada microrepte es pot sobreescriure el contingut del microrepte anterior i substituir-lo pel nou. No és necessari mantindre en este fitxer l'historial complet del curs.
 
 En cada microrepte ha d'indicar:
 
@@ -35,6 +35,18 @@ En cada microrepte ha d'indicar:
 - com es pot provar;
 - on estan les evidències principals;
 - decisions tècniques o dubtes rellevants.
+
+Si una explicació d'un microrepte anterior s'ha de conservar, passa-la a un fitxer específic de `docs/`, per exemple `docs/r2m3.md`. Així `README.md` continua sent ràpid de revisar i sempre apunta al treball que toca corregir.
+
+## Diferència entre els README
+
+| Fitxer | Per a què serveix | L'ha d'omplir l'alumnat? |
+|---|---|---|
+| `README.md` | Fitxa de l'entrega actual: microrepte, què s'ha fet, com provar-ho i on són les evidències. | Sí, en cada microrepte. Es pot sobreescriure. |
+| `docs/README.md` | Guia de què es guarda en `docs/`. | No habitualment. |
+| `evidence/README.md` | Guia de què es guarda en `evidence/`. | No habitualment. |
+| `tests/README.md` | Guia de què es guarda en `tests/`. | No habitualment. |
+| `ENTREGA.md` | Instruccions generals del curs i criteri d'entrega. | No. És una guia de consulta. |
 
 ## Organització recomanada
 
@@ -55,6 +67,13 @@ src/ o app/
 ```
 
 No cal crear totes les carpetes si el microrepte no les necessita. El que sí cal és que el treball actual es puga trobar i provar.
+
+Els fitxers recomanats per microrepte són:
+
+- `README.md`: resum actual i enllaços principals.
+- `docs/rXmY.md`: explicació més llarga, decisions tècniques o notes de disseny.
+- `evidence/rXmY/`: captures, logs, respostes HTTP, traces o resultats manuals.
+- `tests/`: proves automàtiques quan el microrepte les demane o quan ajuden a verificar el treball.
 
 ## Com executar-lo
 
