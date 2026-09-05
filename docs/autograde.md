@@ -14,6 +14,14 @@ La branca ordinària de lliurament és `main`.
 
 Si treballes en una branca pròpia, integra el resultat en `main` abans de demanar correcció.
 
+## Què mirarà la correcció
+
+La correcció automàtica pren `README.md` de l'arrel com a fitxa de l'entrega actual. En cada microrepte ha d'indicar quin microrepte entregues, què has fet, com provar-ho i quins fitxers concrets ha de revisar.
+
+Els fitxers de `docs/`, `evidence/` i `tests/` han d'usar el nom o codi del microrepte i estar enllaçats des de `README.md`, per exemple `docs/r2m3.md`, `evidence/r2m3/` o `tests/r2m3.test.php`.
+
+Els README de carpeta (`docs/README.md`, `evidence/README.md` i `tests/README.md`) són només guies del template. No compten com a entrega del microrepte.
+
 ## Grup i alumne
 
 El sistema de correcció resol el grup docent des de la llista central de repositoris que manté el professorat. L'alumnat no ha de crear cap fitxer de configuració per a l'autocorrecció.
