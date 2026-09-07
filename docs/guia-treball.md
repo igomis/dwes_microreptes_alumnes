@@ -1,6 +1,6 @@
 # Repositori, branques i entrega del treball
 
-Esta és la guia única per accedir al repositori, treballar amb branques, preparar evidències, integrar l’entrega i consultar la correcció. La branca ordinària de correcció és **`main`**. Recomanem una branca per repte i una per microrepte per conservar el procés, sense afegir penalitzacions automàtiques noves.
+Esta és la guia única per accedir al repositori, treballar amb branques, preparar evidències, integrar l’entrega i consultar la correcció. La branca ordinària de correcció és **`main`**. Treballarem amb `main` i una branca per microrepte (el treball diari). Cada branca s’integra directament en `main` amb Git, sense pull requests ni etiquetes en el procediment habitual.
 
 ## Primer accés: invitació i git clone
 
@@ -24,7 +24,7 @@ Substituïx els dos marcadors per la URL real i el nom de la carpeta creada per 
 
 El clonatge descarrega el repositori i el seu historial i configura `origin`. Es fa una vegada per ordinador o còpia de treball. No cal crear abans una carpeta amb `git init`, fer un fork, descarregar un ZIP ni clonar la plantilla docent. Si ja tens esta còpia, entra en ella i sincronitza-la; no repetisques el clonatge per a cada sessió.
 
-En R1S1, treballa en `microrepte/r1m1`, actualitza el README i la fitxa inicial, fes commit i push i seguix les dues PR descrites més avall. Així el primer treball queda integrat en `main` per a la correcció.
+En R1S1, treballa en `microrepte/r1m1`, actualitza el README i la fitxa inicial, fes commit i push i integra la branca directament en `main` com s’explica més avall. Així el primer treball queda integrat en `main` per a la correcció.
 
 ## On ha d'estar el treball
 
@@ -40,193 +40,118 @@ Si una evidència és important, ha d'estar en el repositori i ha de tindre un n
 
 ## README i evidències de cada microrepte
 
-El `README.md` de l’arrel descriu l’entrega actual: codi del microrepte, què has fet, com executar-ho, com provar-ho i enllaços a les evidències. Pot substituir la descripció del microrepte anterior, perquè les branques i etiquetes en conserven la versió. Si necessites una explicació anterior dins de la versió actual, guarda-la en `docs/r2m1.md` o un fitxer equivalent.
+El `README.md` de l’arrel descriu l’entrega actual: codi del microrepte, què has fet, com executar-ho, com provar-ho i enllaços a les evidències. Pot substituir la descripció del microrepte anterior, perquè la branca del microrepte en conserva la versió. Si necessites una explicació anterior dins de la versió actual, guarda-la en `docs/r2m1.md` o un fitxer equivalent.
 
 `ENTREGA.md` i els README de carpeta són instruccions de la plantilla; no cal reescriure’ls en cada entrega. Els fitxers de treball han de ser localitzables, per exemple `docs/r2m1.md` i `evidence/r2m1/`. Registra només l’ús real d’IA i les comprovacions que has fet.
 
 Abans del commit, revisa que no falten fitxers necessaris, que les ordres del README funcionen i que no has inclòs secrets, dades personals innecessàries ni fitxers temporals. Tens [dos exemples de README omplits](#exemples-de-readme-omplits) al final d’esta guia.
 
-## El recorregut d’una entrega
+## El flux de treball
 
 ```text
-microrepte/r2m1 → repte/r2 → main
-                PR 1       PR 2
+main → crear microrepte/r1m1 → treballar → integrar en main
+main → crear microrepte/r1m2 → treballar → integrar en main
 ```
 
-| Referència | Funció |
-|---|---|
-| `main` | Última entrega integrada, disponible per a correcció. |
-| `repte/r2` | Integra el treball del Repte 2. Es crea des de `main`. |
-| `microrepte/r2m1` | Desenvolupament de R2M1. Es crea des de `repte/r2`. |
-| `entrega-r2m1-v1` | Etiqueta del commit de `main` entregat, que es conserva sense moure-la. |
+`main` conté el treball que es corregix. La branca del microrepte conté el treball d’aquell dia i es conserva després d’integrar-la. No creem una branca per repte. Les sessions sense microrepte propi, com R2S0, no necessiten una branca d’entrega.
 
-Substituïx els codis pels del teu repte i microrepte. R2S0 és introductòria i no necessita una branca de microrepte ni una entrega pròpia. No esperes a acabar tot el repte per integrar en `main`: fes-ho en cada microrepte.
+## 1. Començar un microrepte
 
-## 1. Crear la branca del repte, una sola vegada
-
-Els exemples següents usen R2M1. En la primera sessió substituïx `repte/r2` per `repte/r1` i `microrepte/r2m1` per `microrepte/r1m1`; en R1M2 reutilitza `repte/r1` i crea `microrepte/r1m2`. Comença amb els canvis anteriors guardats en commits i `git status` net:
+Des de la carpeta del repositori, amb els canvis anteriors guardats:
 
 ```bash
 git switch main
 git pull --ff-only origin main
-git switch -c repte/r2
-git push -u origin repte/r2
+git switch -c microrepte/r1m1
 ```
 
-Si la branca ja existix localment, usa `git switch repte/r2`. Si només existix en GitHub, fes `git fetch origin` i `git switch --track origin/repte/r2`; no la tornes a crear des de zero.
+Canvia `r1m1` pel microrepte del dia. La branca nova naix de `main` actualitzada, de manera que incorpora també els resultats que haja pujat el corrector. Si ja tens la branca local i només estàs reprenent la feina, usa `git switch microrepte/r1m1`, sense `-c`.
 
-## 2. Crear la branca del microrepte i treballar
+## 2. Treballar, guardar i pujar la branca
 
-```bash
-git switch repte/r2
-git pull --ff-only origin repte/r2
-git fetch origin
-git merge origin/main
-git push origin repte/r2
-git switch -c microrepte/r2m1
-git push -u origin microrepte/r2m1
-```
-
-La sincronització amb `main` incorpora també els resultats que haja publicat el corrector. Escriu codi, actualitza el README, guarda evidències i registra l’ús real d’IA quan corresponga. Fes commits amb sentit mentre avances:
+Escriu el codi o documentació del microrepte, actualitza el README i comprova el resultat. Després:
 
 ```bash
 git status
-git diff
 git add README.md
-# Afig també, pel seu camí, els fitxers de codi i evidències modificats.
+# Afig també els fitxers de codi i evidències que hages modificat.
 git diff --cached
-git commit -m "R2M1: entrada i comprovacions inicials"
-git push
+git commit -m "R1M1: treball i comprovacions"
+git push -u origin microrepte/r1m1
 ```
 
-Abans de continuar, comprova que has pujat tots els fitxers necessaris, que les proves documentades funcionen i que el README descriu el microrepte actual. Un `push` de la branca del microrepte guarda el treball en GitHub, però encara falta integrar-lo en `main`.
+`git add README.md` només prepara eixe fitxer: has d’afegir també la resta de fitxers necessaris pel seu nom. Revisa `git diff --cached` abans del commit. Pots repetir commits durant la sessió; després del primer push amb `-u`, en eixa branca basta `git push`.
 
-## 3. PR del microrepte al repte
+Pujar la branca guarda el treball en GitHub, però encara falta integrar-lo en `main` perquè es puga corregir.
 
-En el teu repositori individual de GitHub, entra en **Pull requests → New pull request**:
+## 3. Entregar: integrar en main
 
-- **base:** `repte/r2` (destinació).
-- **compare:** `microrepte/r2m1` (origen).
-- Títol: `R2M1: entrada i validació bàsica`.
-- Descripció: què has fet, com ho has provat, evidències i dubtes pendents.
-
-Revisa **Files changed**, comprova que no falten fitxers i resol els conflictes si n’hi ha. Quan estiga preparat, tria **Create a merge commit → Merge pull request → Confirm merge**. Conserva la branca del microrepte; no premes **Delete branch**.
-
-Fes tu el merge en el teu repositori, si tens permisos. GitHub no permet enviar una revisió formal **Approve** sobre una PR pròpia: revisar els teus canvis i fer el merge són accions diferents d’eixa aprovació formal. Si una regla exigix una revisió externa o impedix el merge, consulta el professorat.
-
-Usem merge commits per conservar els commits originals i el recorregut entre branques. En este procediment no tries **Squash and merge** ni **Rebase and merge**.
-
-## 4. PR del repte a main, en cada entrega
-
-Crea una segona PR:
-
-- **base:** `main`.
-- **compare:** `repte/r2`.
-- Títol: `Entrega R2M1`.
-- Inclou l’enllaç a la PR anterior, les comprovacions i qualsevol limitació.
-
-Revisa-la i integra-la també amb **Create a merge commit**. Conserva `repte/r2`, perquè la reutilitzaràs en el microrepte següent. Comprova en GitHub, seleccionant `main`, que el codi, el README i les evidències de R2M1 hi són.
-
-Una PR oberta o integrada només en `repte/r2` encara no deixa el treball en la branca corregible. Fer merge tampoc selecciona el microrepte ni llança necessàriament una correcció: això ho gestiona el professorat.
-
-## 5. Conservar la versió exacta entregada
-
-En la PR `Entrega R2M1` ja integrada, copia el SHA del **merge commit**. Usa eixe SHA, perquè `main` podria haver avançat amb una altra entrega o amb resultats del corrector:
+Amb tot guardat en commits, executa estes quatre ordres **una a una**:
 
 ```bash
 git switch main
 git pull --ff-only origin main
+git merge --no-edit microrepte/r1m1
+git push origin main
+```
+
+`git merge` incorpora el treball de la branca en `main`. `--no-edit` evita obrir un editor per al missatge del merge quan Git necessita crear-lo. Normalment la integració és directa. No has de crear una PR ni acceptar-la en GitHub.
+
+Si una ordre dona error o apareix un conflicte, para abans de continuar amb la següent. En acabar, comprova en GitHub, seleccionant `main`, que el README i les evidències són els del microrepte entregat. Repetix la comprovació bàsica d’execució sobre esta versió integrada.
+
+## 4. Continuar l’endemà
+
+Conserva `microrepte/r1m1` localment i en GitHub; no la reutilitzes per al treball següent. Per començar R1M2:
+
+```bash
+git switch main
+git pull --ff-only origin main
+git switch -c microrepte/r1m2
+```
+
+En acabar, repetix els passos de commit, push i merge substituint el nom de branca. El procediment és el mateix quan canvies de repte: per a R2M1 crea `microrepte/r2m1` des de `main` actualitzada.
+
+## Consultar un microrepte anterior
+
+En GitHub, usa el selector de branques per obrir `microrepte/r1m1` i consultar el codi i el README d’aquell moment. La branca es conserva justament per això.
+
+Per llegir un README anterior des del terminal sense canviar de branca:
+
+```bash
 git fetch origin
-git show --stat SHA_DEL_MERGE
-git tag -a entrega-r2m1-v1 SHA_DEL_MERGE -m "Entrega R2M1 v1"
-git push origin entrega-r2m1-v1
+git show origin/microrepte/r1m1:README.md
 ```
 
-`SHA_DEL_MERGE` és un marcador: substituïx-lo pel SHA real. Anota la PR i l’etiqueta en les notes del microrepte. L’etiqueta marca l’entrega; el resultat d’autocorrecció pot referir-se a un commit posterior de `main`, que has de consultar en el mateix resultat.
+No cal restaurar `main` ni tornar a entregar el microrepte. Els microreptes són treball d’aula sense recuperació individual; la recuperació correspon al repte complet i es coordina amb el professorat.
 
-## 6. Continuar amb el següent microrepte
+## Si alguna cosa falla
 
-Amb el directori de treball net, sincronitza i crea una branca nova:
-
-```bash
-git switch repte/r2
-git pull --ff-only origin repte/r2
-git fetch origin
-git merge origin/main
-git push origin repte/r2
-git switch -c microrepte/r2m2
-git push -u origin microrepte/r2m2
-```
-
-Repetix les dues PR per a R2M2. Deixa `microrepte/r2m1` com a referència de la seua feina. En acabar R2, conserva `repte/r2`; crea `repte/r3` des de `main` actualitzada. Les etiquetes permeten consultar el punt exacte de cada entrega encara que després evolucione una branca.
-
-## Consultar una entrega o fer una correcció
-
-En GitHub pots seleccionar una branca o etiqueta per veure els fitxers d’aquell moment. Localment:
-
-```bash
-git fetch origin --tags
-git show entrega-r2m1-v1:README.md
-git log --graph --oneline --all
-```
-
-Per executar una versió antiga sense canviar el directori de treball actual:
-
-```bash
-git worktree add --detach ../consulta-r2m1 entrega-r2m1-v1
-```
-
-Usa una carpeta de destí que no existisca i seguix allí les instruccions d’execució del README d’aquella versió. Quan acabes, i si no hi ha canvis que vulgues conservar, elimina el directori auxiliar amb `git worktree remove ../consulta-r2m1`.
-
-Les branques i etiquetes dels microreptes conserven el treball d’aula original. Pots corregir codi per continuar aprenent, però no hi ha recuperació ni reentrega avaluable individual del microrepte.
-
-Si has de recuperar el repte complet, acorda amb el professorat la versió i les evidències globals que revisarà. Identifica la branca de treball, per exemple `recuperacio/r2`, i conserva una etiqueta diferenciada del repte, com `recuperacio-r2-v1`. Si ja treballes en un repte posterior, acorda la integració abans de modificar `main`; no restaures tot el projecte a una entrega antiga. La valoració és docent i global, sense recorrecció automàtica dels microreptes.
-
-## Si hi ha conflictes
-
-Per a una PR microrepte → repte, actualitza la branca del microrepte amb la destinació:
-
-```bash
-git switch microrepte/r2m1
-git fetch origin
-git merge origin/repte/r2
-```
-
-Per a una PR repte → main, fes el mateix des de `repte/r2` amb `git merge origin/main`. Revisa els fitxers en conflicte, resol els marcadors, guarda els fitxers amb `git add CAMI_DEL_FITXER`, prova el resultat i completa el merge amb `git commit` i `git push`. La PR s’actualitzarà. Si no saps resoldre’l, `git merge --abort` cancel·la el merge en curs; demana ajuda. No uses `push --force` per resoldre una divergència.
-
-Si `git pull --ff-only` falla, revisa `git status` i `git log --graph --oneline --all` abans de continuar; no descartes canvis locals per fer-lo passar.
-
-## Després d’integrar en main
-
-En GitHub, selecciona **`main`** i comprova que el README correspon al microrepte actual i que els seus enllaços porten als fitxers esperats. Una PR pendent o un `push` fet només a la branca de treball no deixa el microrepte en la branca corregible.
-
-La correcció es llança des del repositori central del professorat. No has d’esperar un workflow propi en Actions del teu repositori després de cada push: la plantilla no el necessita. El professorat selecciona el microrepte que es corregix; el nom de la branca no el selecciona.
-
-Quan es publique el resultat en el teu repositori, consulta `autograde/latest.md`. És el resum llegible amb la valoració, els comentaris i els punts que poden requerir revisió. `autograde/latest.json` conté dades estructurades; `autograde/history/`, si hi ha resultats anteriors, en conserva l’historial. L’absència d’un resultat nou no significa per si sola que el push haja fallat.
-
-Abans del treball següent, sincronitza la branca del repte amb `origin/main` com indica el pas 6. Això incorpora també els resultats que el corrector haja afegit.
-
-Els microreptes són treball d’aula sense recuperació individual. Corregir per aprendre no crea una nova entrega avaluable; la recuperació correspon al repte complet i es coordina amb el professorat.
-
-## Checklist de l’entrega
-
-- [ ] He acceptat la invitació i `origin` apunta al repositori assignat.
-- [ ] El README identifica el microrepte actual i explica execució, proves i evidències.
-- [ ] He revisat els fitxers afegits i he fet commit i push en la branca de treball.
-- [ ] He integrat la PR microrepte → repte i la PR repte → main.
-- [ ] He comprovat els fitxers i les proves de la versió integrada en `main`.
-- [ ] He conservat branques i etiqueta del commit entregat, segons el flux recomanat.
-- [ ] Sé on consultar el resultat quan el professorat publique la correcció.
-
-## Problemes d’accés o entrega
-
-| Situació | Què revisar |
+| Situació | Què fer |
 |---|---|
-| El repositori no apareix o diu «not found» | Invitació acceptada, usuari de GitHub correcte i URL assignada. |
-| Pots veure el repositori però no fer push | Credencials Git de l’usuari convidat i permisos; consulta el professorat. |
-| La feina està en GitHub però no en main | Les dues PR encara no estan integrades. |
-| No apareix cap workflow en el teu repositori | La correcció es gestiona des del repositori docent. |
-| El corrector no troba les evidències | Revisa README, camins i contingut de main. |
+| No pots veure o clonar el repositori | Comprova invitació acceptada, usuari i URL assignada. |
+| La branca ja existix | Per reprendre-la, usa `git switch` sense `-c`. |
+| Git no permet canviar de branca | Revisa `git status` i guarda els canvis de la feina actual. |
+| `git pull --ff-only` no pot avançar | Para i demana ajuda; no descartes canvis per forçar-lo. |
+| Conflicte durant el merge | No faces push encara. Resol-lo amb ajuda o cancel·la el merge amb `git merge --abort`. |
+| Push rebutjat perquè main ha avançat | En main, fes `git fetch origin` i `git merge --no-edit origin/main`; si no hi ha conflictes, comprova el resultat i torna a fer push. |
+| Push rebutjat per permisos o protecció | Consulta el professorat perquè revise la configuració del repositori. |
+
+Per resoldre un conflicte amb ajuda: revisa els fitxers que indica `git status`, tria el contingut correcte, elimina els marcadors, afegix els fitxers resolts amb `git add`, completa amb `git commit --no-edit`, comprova el resultat i fes push. No uses `push --force` ni esborres treball per evitar un conflicte.
+
+## Resultat de l’autocorrecció
+
+La correcció es llança des del repositori central del professorat. No has d’esperar un workflow propi en Actions del teu repositori després de cada push: la plantilla no el necessita. El professorat selecciona el microrepte; el nom de la branca no el selecciona.
+
+Quan es publique el resultat, consulta `autograde/latest.md` en el teu repositori. És el resum llegible amb valoració i comentaris. `autograde/latest.json` conté les dades estructurades i `autograde/history/`, si hi ha resultats anteriors, en conserva l’historial. L’absència de resultat nou no significa per si sola que el push haja fallat.
+
+## Checklist final
+
+- [ ] He acceptat la invitació i clonat el repositori assignat.
+- [ ] He treballat en la branca del microrepte i actualitzat el README.
+- [ ] He comprovat codi, documentació i evidències, sense secrets ni temporals.
+- [ ] He fet commit i push de la branca del microrepte.
+- [ ] He integrat la branca en main i fet push de main.
+- [ ] He comprovat l’entrega en main i conservat la branca del microrepte.
 
 ## Exemples de README omplits
 
@@ -416,4 +341,3 @@ No presente ampliació de R1. La landing forma part del nucli obligatori.
 Si presentes l'ampliació, substituïx només eixe últim apartat per una descripció real i un enllaç a `docs/r1-ampliacio.md`, amb les rutes i les proves corresponents. Es recull en R1M2 com a últim microrepte de R1 i queda pendent de validació docent; no cal incloure-la en el README de R1M1. Consulta la [regla d'ampliació del repte](../ampliacions-excellencia.md).
 
 En passar de R1M1 a R1M2, actualitza el README amb l'entrega actual i conserva `docs/r1m1.md`. En entregues posteriors, aplica el mateix criteri amb els codis i les evidències que pertoquen.
-

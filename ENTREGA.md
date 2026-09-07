@@ -22,7 +22,7 @@ La branca ordinària de lliurament i correcció és:
 main
 ```
 
-Recomanem el flux de branques per repte i microrepte explicat al final d’esta guia. Integra cada entrega en `main` abans de demanar correcció.
+Seguix el flux amb una branca per microrepte explicat al final d’esta guia. Integra cada entrega en `main` abans de demanar correcció.
 
 El nom de la branca no decideix quin microrepte es corregeix. El microrepte actiu el configura el professorat des del sistema d'autocorrecció.
 
@@ -184,25 +184,7 @@ La nota automàtica és provisional i pot requerir revisió docent.
 
 ## Com pujar una entrega
 
-Abans d'entregar:
-
-- [ ] actualitza `README.md`;
-- [ ] comprova que les evidències estan dins del repositori;
-- [ ] comprova que no has pujat secrets reals, tokens o fitxers temporals;
-- [ ] integra el treball en `main`.
-
-Comandes habituals:
-
-```bash
-git status
-git add .
-git commit -m "Entrega R2M3"
-git push origin main
-```
-
-Canvia `R2M3` pel microrepte que estàs entregant.
-
-Després del `push`, revisa en GitHub que els fitxers s'han pujat correctament.
+Actualitza el README, comprova les evidències i guarda els canvis en la branca del microrepte. Fes push d’eixa branca, integra-la en `main` i puja `main`. Les comandes estan en la [guia única de treball](docs/guia-treball.md#3-entregar-integrar-en-main).
 
 ## Estat actual
 
@@ -210,7 +192,7 @@ Repositori base preparat per començar el treball de l'alumne.
 
 ## Branques i historial
 
-Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](docs/guia-treball.md).
+Treballa en una branca per microrepte i integra-la directament en `main` amb `git merge`, sense PR. Conserva la branca del microrepte per consultar-la després. Consulta el [procediment complet](docs/guia-treball.md).
 
 ## Entendre i corregir abans de continuar
 

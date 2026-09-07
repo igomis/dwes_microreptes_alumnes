@@ -12,7 +12,7 @@ Si el bloqueig persistix, el professorat acordarà ajuda durant el treball guiat
 
 ## Conserva el procés
 
-Anota el microrepte, l’error, la correcció i els casos provats. Registra l’ús real d’IA si n’hi ha. Conserva les branques i etiquetes originals com a evidència del treball d’aula. Pots millorar el codi per continuar el projecte, sense convertir cada canvi en una nova entrega del microrepte.
+Anota el microrepte, l’error, la correcció i els casos provats. Registra l’ús real d’IA si n’hi ha. Conserva les branques originals dels microreptes com a evidència del treball d’aula. Pots millorar el codi per continuar el projecte, sense convertir cada canvi en una nova entrega del microrepte.
 
 ## Si no has assolit el repte complet
 

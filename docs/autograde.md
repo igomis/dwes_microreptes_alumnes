@@ -47,4 +47,4 @@ Quan el professorat executa la correcció massiva amb IA, el resultat es publica
 
 ## Branques i historial
 
-Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](guia-treball.md).
+Treballa en una branca per microrepte i integra-la directament en `main` amb `git merge`, sense PR. Conserva la branca del microrepte per consultar-la després. Consulta el [procediment complet](guia-treball.md).

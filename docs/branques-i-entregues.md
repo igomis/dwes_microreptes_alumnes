@@ -1,3 +1,3 @@
 # Guia unificada
 
-Consulta [Repositori, branques i entrega del treball](guia-treball.md), amb el procediment complet des de la invitació fins a la correcció.
+Consulta [Repositori, branques i entrega del treball](guia-treball.md), amb invitació, clonatge i una branca per microrepte que s’integra directament en `main`.
