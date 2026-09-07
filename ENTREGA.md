@@ -207,3 +207,7 @@ Repositori base preparat per començar el treball de l'alumne.
 ## Branques i historial
 
 Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](docs/branques-i-entregues.md).
+
+## Entendre i corregir abans de continuar
+
+Les sessions reserven temps de retorn, correcció guiada i comprovació de la comprensió. Consulta [què fer si encara no has assolit un microrepte](docs/consolidacio-i-recuperacio-repte.md). Els microreptes són treball d’aula sense recuperació individual. La recuperació correspon al repte complet.

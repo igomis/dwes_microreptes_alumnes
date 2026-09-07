@@ -134,9 +134,9 @@ git worktree add --detach ../consulta-r2m1 entrega-r2m1-v1
 
 Usa una carpeta de destí que no existisca i seguix allí les instruccions d’execució del README d’aquella versió. Quan acabes, i si no hi ha canvis que vulgues conservar, elimina el directori auxiliar amb `git worktree remove ../consulta-r2m1`.
 
-Per corregir una entrega abans de continuar el mateix repte, crea `microrepte/r2m1-revisio-2` des de la branca del repte sincronitzada, repetix les dues PR i crea `entrega-r2m1-v2`. No mogues ni sobreescrigues `v1`.
+Les branques i etiquetes dels microreptes conserven el treball d’aula original. Pots corregir codi per continuar aprenent, però no hi ha recuperació ni reentrega avaluable individual del microrepte.
 
-Si ja treballes en un repte posterior, consulta el professorat abans de preparar una recorrecció antiga: canviar una etiqueta no canvia què es corregix en `main`. No restaures tot `main` a una entrega antiga; porta només la correcció necessària al treball actual.
+Si has de recuperar el repte complet, acorda amb el professorat la versió i les evidències globals que revisarà. Identifica la branca de treball, per exemple `recuperacio/r2`, i conserva una etiqueta diferenciada del repte, com `recuperacio-r2-v1`. Si ja treballes en un repte posterior, acorda la integració abans de modificar `main`; no restaures tot el projecte a una entrega antiga. La valoració és docent i global, sense recorrecció automàtica dels microreptes.
 
 ## Si hi ha conflictes
 
