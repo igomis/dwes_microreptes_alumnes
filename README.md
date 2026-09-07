@@ -79,4 +79,4 @@ Si el microrepte ho demana, crea o actualitza també `docs/ai-log.md`.
 
 ## Branques i historial
 
-Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](docs/branques-i-entregues.md).
+Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](docs/guia-treball.md).

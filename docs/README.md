@@ -20,4 +20,4 @@ No barreges tots els microreptes en un únic document llarg si això dificulta t
 
 ## Branques i historial
 
-Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](branques-i-entregues.md).
+Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](guia-treball.md).

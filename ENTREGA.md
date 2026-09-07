@@ -10,6 +10,10 @@ Este fitxer és part del repositori base. No l'uses com a fitxa d'entrega del mi
 
 Els README de `docs/`, `evidence/` i `tests/` són guies de carpeta del template. No cal modificar-los per entregar un microrepte.
 
+## Primer accés
+
+El professorat crea este repositori i et convida com a col·laborador. Accepta la invitació amb el teu usuari de GitHub i fes `git clone` de la URL del repositori assignat. El clonatge és una vegada per còpia de treball. Seguix la [guia única de repositori, branques i entrega](docs/guia-treball.md).
+
 ## Branca corregible
 
 La branca ordinària de lliurament i correcció és:
@@ -206,7 +210,7 @@ Repositori base preparat per començar el treball de l'alumne.
 
 ## Branques i historial
 
-Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](docs/branques-i-entregues.md).
+Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](docs/guia-treball.md).
 
 ## Entendre i corregir abans de continuar
 
