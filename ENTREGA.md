@@ -18,7 +18,7 @@ La branca ordinària de lliurament i correcció és:
 main
 ```
 
-Pots treballar en branques pròpies si t'ajuda a organitzar-te, per exemple `r2m3`, `r3m5` o `feature/auth`, però abans de demanar correcció has d'integrar el treball en `main`.
+Recomanem el flux de branques per repte i microrepte explicat al final d’esta guia. Integra cada entrega en `main` abans de demanar correcció.
 
 El nom de la branca no decideix quin microrepte es corregeix. El microrepte actiu el configura el professorat des del sistema d'autocorrecció.
 
@@ -203,3 +203,7 @@ Després del `push`, revisa en GitHub que els fitxers s'han pujat correctament.
 ## Estat actual
 
 Repositori base preparat per començar el treball de l'alumne.
+
+## Branques i historial
+
+Recomanem una branca per repte i una per microrepte: `microrepte/r2m1 → repte/r2 → main`. Integra cada entrega amb dues PR que pots revisar i fusionar tu mateix; conserva les branques i marca el commit entregat amb una etiqueta. La correcció continua en `main`. Consulta el [procediment complet](docs/branques-i-entregues.md).
