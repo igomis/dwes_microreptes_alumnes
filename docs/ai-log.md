@@ -1,21 +1,27 @@
 # AI log
 
-Ompli este fitxer quan el microrepte exigisca registre d'ús d'IA o quan l'ús siga rellevant per entendre el treball.
+Consulta primer la [guia d’ús de la IA](guia-ia.md). Usa un únic registre en `docs/ai-log.md`.
 
-No cal copiar tota la conversa. Per a cada consulta important, copia el text exacte de la pregunta o prompte principal perquè es puga comprovar si estava alineat amb l'objectiu.
+No és obligatori usar IA. Si no l’has usada en el microrepte, substituïx l’entrada buida per: **«No he utilitzat IA en R?M?»**, amb les fonts consultades si n’hi ha. No inventes consultes ni proves.
 
-## Consulta 1 - R?M? - Títol breu
+Duplica este bloc només per a consultes reals rellevants. Inclou també la generació permesa d’HTML/CSS; no cal copiar tota la conversa.
 
-- Objectiu de la consulta:
-- Pregunta o prompte literal:
+## Consulta — R?M? — Títol breu
+
+- Data i ferramenta:
+- Dubte o objectiu:
+- Teoria o apunts consultats:
+- Intent propi abans de preguntar (codi, esquema o hipòtesi):
+- Pregunta principal literal:
 
 ```text
-Escriu ací el text exacte que has enviat a la IA.
+[Pregunta real enviada a la IA.]
 ```
 
-- Resum del suggeriment:
-- Què s'ha acceptat:
-- Què s'ha rebutjat o modificat:
-- Què no he entés encara o quin dubte queda:
-- Com s'ha verificat:
-- En quin fitxer o commit es veu:
+- Ajuda rebuda (indica qualsevol codi generat):
+- Què he acceptat i què he descartat:
+- Què he decidit i implementat jo:
+- Fitxer, commit o apunts relacionats, si correspon:
+- Com ho he comprovat (passos o ordre, dades i resultat real):
+- Què puc explicar o modificar sense IA:
+- Dubtes pendents:

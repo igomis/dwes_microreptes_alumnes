@@ -2,6 +2,8 @@
 
 Este és el fitxer que has d'actualitzar en cada entrega.
 
+Abans de treballar, llig la [guia d’ús de la IA](docs/guia-ia.md): ajuda per comprendre i pistes, sense delegar el backend. Registra l’ajuda real en [docs/ai-log.md](docs/ai-log.md).
+
 En cada microrepte pots sobreescriure el contingut anterior d'este `README.md`. Ha de descriure l'entrega actual, no tot l'historial del curs. Si necessites conservar informació d'un microrepte anterior, guarda-la en un fitxer propi de `docs/`, per exemple `docs/r2m3.md`.
 
 No cal modificar els README de `docs/`, `evidence/` o `tests`: són guies de carpeta.

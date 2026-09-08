@@ -1,5 +1,8 @@
 # Repositori, branques i entrega del treball
 
+Abans de començar, consulta la [guia d’ús de la IA](guia-ia.md): què està permés, com demanar pistes i com registrar l’ajuda real.
+
+
 Esta és la guia única per accedir al repositori, treballar amb branques, preparar evidències, integrar l’entrega i consultar la correcció. La branca ordinària de correcció és **`main`**. Treballarem amb `main` i una branca per microrepte (el treball diari). Cada branca s’integra directament en `main` amb Git, sense pull requests ni etiquetes en el procediment habitual.
 
 ## Primer accés: invitació i git clone
