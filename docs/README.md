@@ -21,3 +21,5 @@ No barreges tots els microreptes en un únic document llarg si això dificulta t
 ## Branques i historial
 
 Treballa en una branca per microrepte i integra-la directament en `main` amb `git merge`, sense PR. Conserva la branca del microrepte per consultar-la després. Consulta el [procediment complet](guia-treball.md).
+
+En [ai-log.md](ai-log.md) tens la guia d’IA i el report breu junts. Ompli només «El meu registre» i conserva les entrades anteriors.
