@@ -2,7 +2,9 @@
 
 Este és el fitxer que has d'actualitzar en cada entrega.
 
-Consulta i ompli [IA: guia i registre d’ús](docs/ai-log.md). En un únic fitxer tens les normes, les preguntes model i l’apartat per registrar l’ajuda real.
+Consulta la [guia d’ús de la IA](docs/guia-ia.md) i registra les consultes reals
+en el [registre únic d’ús d’IA](docs/ai-log.md). Pots conservar els aprenentatges
+reutilitzables en la [base de coneixement personal](docs/base-coneixement/index.md).
 
 En cada microrepte pots sobreescriure el contingut anterior d'este `README.md`. Ha de descriure l'entrega actual, no tot l'historial del curs. Si necessites conservar informació d'un microrepte anterior, guarda-la en un fitxer propi de `docs/`, per exemple `docs/r2m3.md`.
 

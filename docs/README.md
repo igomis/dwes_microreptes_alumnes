@@ -10,6 +10,8 @@ Usa noms que permeten trobar ràpidament el treball, per exemple:
 r2m3.md
 r3m5.md
 ai-log.md
+guia-ia.md
+base-coneixement/index.md
 ```
 
 `README.md` ha d'indicar quin és el microrepte actual i quins documents cal revisar.
@@ -22,4 +24,8 @@ No barreges tots els microreptes en un únic document llarg si això dificulta t
 
 Treballa en una branca per microrepte i integra-la directament en `main` amb `git merge`, sense PR. Conserva la branca del microrepte per consultar-la després. Consulta el [procediment complet](guia-treball.md).
 
-En [ai-log.md](ai-log.md) tens la guia d’IA i el report breu junts. Ompli només «El meu registre» i conserva les entrades anteriors.
+Consulta en [guia-ia.md](guia-ia.md) les normes i les instruccions d’emplenament.
+Usa [ai-log.md](ai-log.md) exclusivament per a les consultes reals i conserva
+les entrades anteriors. Organitza els aprenentatges reutilitzables per temes en
+la [base de coneixement personal](base-coneixement/index.md), sense duplicar el
+registre.

@@ -53,8 +53,20 @@ que ha llegit les instruccions des de l'arrel fins al directori de treball.
 
 ### Límit d'escriptura en el registre d'IA
 
+- La guia permanent és `docs/guia-ia.md`. L'agent només la pot llegir i no pot
+  modificar-la, substituir-la, moure-la ni esborrar-la.
 - El registre únic és `docs/ai-log.md`; no s'ha de crear un altre `AI.log`,
   `ai.log` o fitxer equivalent.
+- Quan l'alumne demane omplir el registre, l'agent ha d'identificar primer el
+  microrepte. Si no el pot deduir amb seguretat del context o dels fitxers, ha
+  de preguntar a l'alumne quin és abans d'escriure l'entrada.
+- L'agent ha de resumir la interacció i agrupar en una sola entrada les
+  preguntes que compartisquen un mateix objectiu, si el pot identificar amb
+  seguretat. Dins de l'entrada agrupada ha de reproduir totes les preguntes de
+  l'alumne literalment i en el mateix ordre, sense corregir-les, resumir-les ni
+  parafrasejar-les. Ha de resumir l'ajuda rebuda i la resta de camps. No ha de
+  crear una entrada per cada missatge ni copiar respostes completes o fragments
+  grans de codi.
 - L'agent pot afegir només dades objectives de la interacció que coneix de
   primera mà: data, ferramenta, microrepte, pregunta literal i, si correspon,
   els fitxers HTML, CSS o JavaScript de navegador que ell mateix haja generat o
@@ -66,6 +78,20 @@ que ha llegit les instruccions des de l'arrel fins al directori de treball.
 - No s'han d'inventar consultes, decisions, proves, resultats, evidències ni
   fonts. Si una dada no és verificable o requerix una reflexió personal, l'agent
   la deixa en blanc i indica a l'alumne que l'ha d'omplir.
+
+### Base de coneixement personal
+
+- L'alumnat pot mantindre notes reutilitzables per tema en
+  `docs/base-coneixement/`. Esta base no substituïx `docs/ai-log.md` ni les
+  evidències del microrepte.
+- Si l'alumne ho demana, l'agent pot proposar temes, agrupar preguntes amb un
+  mateix objectiu, crear l'estructura de les notes i ordenar informació que
+  conste realment en la conversa o en els fitxers aportats.
+- L'agent no pot inventar què ha aprés l'alumne, redactar reflexions personals
+  no aportades, copiar respostes completes ni traslladar a estes notes una
+  solució avaluable que no estaria permés implementar.
+- Abans de crear un fitxer nou, ha de comprovar si ja existix una nota del mateix
+  tema i preferir ampliar-la per evitar duplicats.
 
 ### Fitxers `README.md` protegits
 
