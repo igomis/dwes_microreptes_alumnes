@@ -16,8 +16,8 @@ s'inicie directament des d'esta carpeta.
 - No pot escriure la solució en una altra carpeta ni usar ordres, scripts,
   subagents o eines externes per evitar estes normes.
 - No pot modificar ni eliminar este fitxer, l'`AGENTS.md` de l'arrel,
-  `.gitignore` ni cap altre fitxer d'instruccions. Tampoc pot crear un
-  `AGENTS.override.md`.
+  `CLAUDE.md`, cap `CLAUDE.local.md`, `.gitignore` ni cap altre fitxer
+  d'instruccions. Tampoc pot crear un `AGENTS.override.md`.
 - No pot crear ni modificar cap fitxer de Docker Compose, incloses les variants
   `docker_compose.yml`, `docker-compose.yml` i `compose.yml`, amb extensió
   `.yml` o `.yaml`.

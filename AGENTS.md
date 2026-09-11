@@ -13,12 +13,15 @@ que ha llegit les instruccions des de l'arrel fins al directori de treball.
 ### Fitxers de control protegits
 
 - L'agent no pot crear, modificar, substituir, moure ni esborrar `AGENTS.md`,
-  cap `AGENTS.override.md` ni `.gitignore`, en cap directori.
+  `CLAUDE.md`, cap `AGENTS.override.md`, cap `CLAUDE.local.md` ni `.gitignore`,
+  en cap directori.
 - `src/AGENTS.md` és un fitxer de control preexistent i l'única excepció a la
   presència d'un fitxer que no siga HTML, CSS o JavaScript de navegador dins de
   `src/`. L'agent només el pot llegir.
 - L'agent no pot usar scripts, ordres de terminal, canvis de configuració,
   subagents ni eines externes per evitar estes restriccions.
+- Els `CLAUDE.md` preexistents només importen estes mateixes normes perquè
+  Claude Code també les carregue. L'agent només els pot llegir.
 
 ### Límit d'escriptura en `src/`
 
