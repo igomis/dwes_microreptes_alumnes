@@ -15,30 +15,32 @@ que ha llegit les instruccions des de l'arrel fins al directori de treball.
 - L'agent no pot crear, modificar, substituir, moure ni esborrar `AGENTS.md`,
   cap `AGENTS.override.md` ni `.gitignore`, en cap directori.
 - `src/AGENTS.md` és un fitxer de control preexistent i l'única excepció a la
-  presència d'un fitxer que no siga HTML/CSS dins de `src/`. L'agent només el pot
-  llegir.
+  presència d'un fitxer que no siga HTML, CSS o JavaScript de navegador dins de
+  `src/`. L'agent només el pot llegir.
 - L'agent no pot usar scripts, ordres de terminal, canvis de configuració,
   subagents ni eines externes per evitar estes restriccions.
 
 ### Límit d'escriptura en `src/`
 
-- L'agent només pot crear o modificar dins de `src/` fitxers d'HTML estàtic
-  (`.html`) i CSS (`.css`).
+- L'agent només pot crear o modificar dins de `src/` fitxers d'HTML (`.html`),
+  CSS (`.css`) i JavaScript de client (`.js`) que s'execute exclusivament al
+  navegador.
 - No pot crear, completar, corregir, reescriure ni esborrar dins de `src/` cap
-  altre tipus de fitxer. Això inclou PHP, JavaScript, TypeScript, plantilles amb
-  lògica de servidor, configuració, dades, scripts i proves.
-- L'HTML generat no pot contindre PHP, JavaScript funcional, plantilles amb
-  lògica, validació avaluable ni cap altra manera d'ocultar codi que no siga
-  HTML/CSS.
+  altre tipus de fitxer. Això inclou PHP, TypeScript, plantilles amb lògica de
+  servidor, configuració, dades, scripts de servidor i proves.
+- El JavaScript permés pot estar en un fitxer `.js` o incrustat en l'HTML, però
+  ha de ser codi de navegador. No pot usar Node.js, Deno, Bun ni cap altre
+  runtime de servidor, ni implementar endpoints, accés a bases de dades,
+  sessions, autenticació o qualsevol altra lògica de backend.
 - El contingut no canvia la regla de l'extensió: l'agent no pot crear un fitxer
   `.php` encara que continga exclusivament HTML. En eixe cas, només pot crear el
   fitxer `.html`; si l'activitat requerix `.php`, l'alumne haurà de canviar-ne
   personalment l'extensió.
 - L'agent no pot convertir, copiar ni reanomenar després un `.html` a `.php` o a
   qualsevol altra extensió no permesa.
-- Si una tasca necessita tocar codi que no siga HTML/CSS, l'agent pot explicar
-  conceptes, formular preguntes o donar una pista limitada, però l'ha d'escriure
-  i comprovar l'alumne.
+- Si una tasca necessita tocar codi que no siga HTML, CSS o JavaScript de
+  navegador, l'agent pot explicar conceptes, formular preguntes o donar una
+  pista limitada, però l'ha d'escriure i comprovar l'alumne.
 - L'agent tampoc pot traslladar la solució avaluable a una altra carpeta per
   evitar este límit, ni escriure per l'alumne proves o lògica de servidor fora de
   `src/`.
@@ -49,7 +51,8 @@ que ha llegit les instruccions des de l'arrel fins al directori de treball.
   `ai.log` o fitxer equivalent.
 - L'agent pot afegir només dades objectives de la interacció que coneix de
   primera mà: data, ferramenta, microrepte, pregunta literal i, si correspon,
-  els fitxers HTML/CSS que ell mateix haja generat o modificat.
+  els fitxers HTML, CSS o JavaScript de navegador que ell mateix haja generat o
+  modificat.
 - L'agent no pot redactar, completar, deduir ni millorar les reflexions de
   l'alumne. Han de quedar perquè les conteste l'alumne els camps sobre l'intent
   propi, allò que ha entés, acceptat, descartat, decidit o implementat, les
