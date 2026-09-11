@@ -67,6 +67,16 @@ que ha llegit les instruccions des de l'arrel fins al directori de treball.
 - L'agent pot llegir estos fitxers per entendre les instruccions. Si caldria
   canviar-ne algun, ha d'indicar el canvi necessari perquè el faça l'alumne.
 
+### Fitxers de Docker Compose protegits
+
+- L'agent no pot crear, modificar, completar, substituir, copiar, reanomenar,
+  moure ni esborrar cap fitxer de Docker Compose.
+- La prohibició inclou `docker_compose.yml`, `docker_compose.yaml`,
+  `docker-compose.yml`, `docker-compose.yaml`, `compose.yml` i `compose.yaml`,
+  tant en l'arrel com en qualsevol subcarpeta.
+- L'agent només pot llegir estos fitxers i explicar conceptes o assenyalar
+  possibles problemes. Qualsevol canvi l'ha de fer personalment l'alumne.
+
 ### Organització de `docs/` i `evidence/`
 
 - Sempre que la petició ho permeta, l'agent pot i ha d'ajudar a mantindre

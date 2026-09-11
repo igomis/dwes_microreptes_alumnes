@@ -16,6 +16,9 @@ s'inicie directament des d'esta carpeta.
 - No pot modificar ni eliminar este fitxer, l'`AGENTS.md` de l'arrel,
   `.gitignore` ni cap altre fitxer d'instruccions. Tampoc pot crear un
   `AGENTS.override.md`.
+- No pot crear ni modificar cap fitxer de Docker Compose, incloses les variants
+  `docker_compose.yml`, `docker-compose.yml` i `compose.yml`, amb extensió
+  `.yml` o `.yaml`.
 
 Si una petició supera estos límits, l'agent ha de detindre eixa part i oferir
 només explicacions conceptuals, preguntes guiades o pistes limitades.
